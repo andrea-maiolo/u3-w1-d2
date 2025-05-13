@@ -43,9 +43,9 @@ class AllTheBooks extends Component {
                 <Card.Img variant="top" src={book.img} alt={book.title} className="img-fluid h-75" />
                 <Card.Body className="d-flex flex-column">
                   <Card.Title className="text-truncate">{book.title}</Card.Title>
-                  <Card.Subtitle>
+                  <Card.Text>
                     Price <Badge bg="secondary">{book.price}</Badge>
-                  </Card.Subtitle>
+                  </Card.Text>
                   <Card.Text className="fs-6">
                     Category <Badge bg="success">{book.category}</Badge>
                   </Card.Text>
