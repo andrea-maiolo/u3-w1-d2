@@ -1,40 +1,44 @@
 import { Component } from "react";
-import fantasy from "../assets/books/fantasy.json";
-import history from "../assets/books/history.json";
-import horror from "../assets/books/horror.json";
-import romance from "../assets/books/romance.json";
-import scifi from "../assets/books/scifi.json";
-
+import fantasyBooks from "../assets/books/fantasy.json";
+import historyBooks from "../assets/books/history.json";
+import horrorBooks from "../assets/books/horror.json";
+import romanceBooks from "../assets/books/romance.json";
+import scifiBooks from "../assets/books/scifi.json";
 import { Badge, Card, Col, Container, Form, Row } from "react-bootstrap";
 
-console.log(fantasy);
-console.log(history);
-console.log(horror);
-console.log(romance);
-console.log(scifi);
+const currentBookArray = {
+  fantasy: fantasyBooks,
+  history: historyBooks,
+  horror: horrorBooks,
+  romance: romanceBooks,
+  scifi: scifiBooks,
+};
 
 class AllTheBooks extends Component {
+  state = {
+    selectedBookList: fantasyBooks,
+  };
 
-    const handleSelection = function(){
-        
-    }
+  handleSelection = (e) => {
+    this.setState({ selectedBookList: currentBookArray[e.target.value] });
+  };
 
   render() {
     return (
       <Container fluid>
         <Row>
-          <Col sm={12} className="mb-5">
-            <Form.Select aria-label="options for books" onChange={handleSelection}>
-              <option>Seleziona il tuo genere</option>
-              <option value={fantasy}>Fantasy</option>
-              <option value={history}>History</option>
-              <option value={horror}>Horror</option>
-              <option value={romance}>Romance</option>
-              <option value={scifi}>Scifi</option>
+          <Col sm={12} className="mb-3">
+            <Form.Select aria-label="options for books" onChange={this.handleSelection}>
+              <option disabled>Seleziona il tuo genere</option>
+              <option value="fantasy">Fantasy</option>
+              <option value="history">History</option>
+              <option value="horror">Horror</option>
+              <option value="romance">Romance</option>
+              <option value="scifi">Scifi</option>
             </Form.Select>
           </Col>
-          {fantasy.map((book) => (
-            <Col key={book.asin} sm={12} md={2} className="mb-3">
+          {this.state.selectedBookList.map((book) => (
+            <Col key={book.asin} sm={12} md={4} lg={3} className="mb-3">
               <Card className="h-100">
                 <Card.Img variant="top" src={book.img} alt={book.title} className="img-fluid h-75" />
                 <Card.Body className="d-flex flex-column">
@@ -42,6 +46,9 @@ class AllTheBooks extends Component {
                   <Card.Subtitle>
                     Price <Badge bg="secondary">{book.price}</Badge>
                   </Card.Subtitle>
+                  <Card.Text className="fs-6">
+                    Category <Badge bg="success">{book.category}</Badge>
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </Col>

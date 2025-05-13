@@ -4,7 +4,7 @@ import { Container, Nav, Navbar, NavbarBrand } from "react-bootstrap";
 class Mynav extends Component {
   render() {
     return (
-      <Navbar>
+      <Navbar bg="dark" data-bs-theme="dark">
         <Container>
           <NavbarBrand className="text-success">Libreria online</NavbarBrand>
           <Nav>
